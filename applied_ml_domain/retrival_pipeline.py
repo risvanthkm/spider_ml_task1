@@ -1,12 +1,14 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import ChatOllama
-from io import BytesIO
-from PIL import Image
-import base64
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_community.retrievers import  BM25Retriever
+from langchain_core.documents import Document
+from sentence_transformers import CrossEncoder
 
 embedding_model = HuggingFaceEmbeddings(model_name = "BAAI/bge-m3")
 llm = ChatOllama(model='gemma4')
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
 
 db = Chroma(
     embedding_function=embedding_model,
@@ -14,15 +16,46 @@ db = Chroma(
     collection_metadata={'hnsw:space' : 'cosine'}
 )
 
+stored_data = db.get()
+chunks = []
+
+for cont, metedata in zip(stored_data["documents"], stored_data["metadatas"]):
+    chunks.append(Document(page_content=cont, metedata=metedata))
+
+vector_retriever = db.as_retriever(search_kwargs={"k": 10})
+
+keyword_retriever = BM25Retriever.from_documents(chunks)
+keyword_retriever.k = 10
+
+hybrid_retriever = EnsembleRetriever(retrievers=[vector_retriever, keyword_retriever], weights=[0.6, 0.4])
+
+def rerank(query, chunks , top_k=3):
+    combined = []
+
+    for doc in chunks:
+        combined.append([query, doc.page_content])
+
+    scores = reranker.predict(combined)
+    score_list=list(zip(chunks, scores))
+
+    score_list.sort(key = lambda x :x[1], reverse=True)
+    top_k_docs = [doc for doc, _ in score_list[:top_k]]
+
+    return top_k_docs
+
+
 def retrieve(query):
     response={}
+    
+    retrieved_chunks= hybrid_retriever.invoke(query)
+    relevent_chunks = rerank(query, retrieved_chunks)
 
-    retriever = db.as_retriever(search_kwargs={"k": 5})
-    relevent_chunks = retriever.invoke(query)
     relevent_docs=""
+
     images = []
     tables = []
     sources = []
+
     for i , chunk in enumerate(relevent_chunks, 1):
 
         relevent_docs += f"Document {i}:\n{chunk.page_content}\n"

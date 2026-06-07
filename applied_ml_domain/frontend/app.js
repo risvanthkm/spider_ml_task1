@@ -70,7 +70,6 @@ function renderImages(images){
 		const img = document.createElement("img")
 		img.src = `data:image/png;base64,${img64}`;
 		img.style.maxWidth = "300px";
-        img.style.height="500px";
 		container.appendChild(img);
 	
 	}); 
