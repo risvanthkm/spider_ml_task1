@@ -1,7 +1,6 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import ChatOllama
-import matplotlib.pyplot as plt
 from io import BytesIO
 from PIL import Image
 import base64
@@ -18,7 +17,7 @@ db = Chroma(
 def retrieve(query):
     response={}
 
-    retriever = db.as_retriever(search_kwargs={"k": 3})
+    retriever = db.as_retriever(search_kwargs={"k": 5})
     relevent_chunks = retriever.invoke(query)
     relevent_docs=""
     images = []

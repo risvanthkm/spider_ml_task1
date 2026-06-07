@@ -35,7 +35,7 @@ chatForm.addEventListener('submit', async (e) => {
         renderSource(data.sources);
     }
     catch(err){
-        addMessage(`Fetch failed .. ${err}", "bot"`);
+        addMessage(`Fetch failed .. ${err}`, "bot");
     }
 
     finally{
