@@ -6,7 +6,7 @@
 
 ---
 
-This is a multimodal Retrieval-Augmented Generation (RAG) system , which ingests various research papers related to LLMs, Transformers and RAG systems. The architecture supports multi-modal retrieval capabilities, allowing extraction of relevant textual content, tables, and images from research documents. Retrieved outputs are rendered through a frontend supporting Markdown, LaTeX, and KaTeX, enabling structured visualization of mathematical expressions, technical content, and research artifacts.
+>This is a multimodal Retrieval-Augmented Generation (RAG) system , which ingests various research papers related to LLMs, Transformers and RAG systems. The architecture supports multi-modal retrieval capabilities, allowing extraction of relevant textual content, tables, and images from research documents. Retrieved outputs are rendered through a frontend supporting Markdown, LaTeX, and KaTeX, enabling structured visualization of mathematical expressions, technical content, and research artifacts.
 
 ## Features
 
