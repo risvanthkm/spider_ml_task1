@@ -6,13 +6,13 @@
 
 ---
 
->This is a multimodal Retrieval-Augmented Generation (RAG) system , which ingests various research papers related to LLMs, Transformers and RAG systems. The architecture supports multi-modal retrieval capabilities, allowing extraction of relevant textual content, tables, and images from research documents. Retrieved outputs are rendered through a frontend supporting Markdown, LaTeX, and KaTeX, enabling structured visualization of mathematical expressions, technical content, and research artifacts.
+>This is a multimodal Retrieval-Augmented Generation (RAG) system , which ingests various research papers related to LLMs, Transformers and RAG systems. The architecture supports multi-modal retrieval capabilities, allowing extraction of relevant textual content, tables, and images from research documents. This is achieved by converting images and tables into summarized textual representations using a LLM and store their embeddings in the VectorDatabase. Retrieved outputs are rendered through a frontend supporting Markdown, LaTeX enabling structured visualization of mathematical expressions, technical content, and research artifacts.
 
 ## Features
 
 ---
 
-1. **Multimodal RAG** - Extracts textual content, tables, and images from research papers
+1. **Multimodal RAG** - Retrieves textual content, tables, and images from research papers
 2. **Reranking** - Reranks retrieved chunks to select highly relevant chunks.
 3. **Hybrid Search** - Hybrid search combines keyword search (BM25) with vector search 
 4. **Multi paper retrieval** - Supports retrieval across multiple research papers simultaneously
