@@ -65,7 +65,7 @@ E --> F1[Raw Text]
 E --> F2[Tables HTML]
 E --> F3[Images Base64]
 
-F1 --> G[Multimodal Preprocessing]
+F1 --> G[Multimodal Preprocessing<br/>LLM extracts information from Images and tables]
 F2 --> G
 F3 --> G
 
