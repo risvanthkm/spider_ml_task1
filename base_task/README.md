@@ -9,6 +9,17 @@ The project trains a given Neural network architecture  to classify grayscale cl
 ---
 ## Model Architecture
 ```mermaid
+%%{
+init: {
+'theme':'base',
+'themeVariables':{
+'lineColor':'#FFFFFF',
+'primaryBorderColor':'#FFFFFF',
+'primaryTextColor':'#000000'
+}
+}
+}%%
+
 flowchart TD
     A["**INPUT LAYER**
     In: (None, 28, 28)
@@ -60,6 +71,8 @@ flowchart TD
     H --> I
     G --> I
     I --> J
+    
+linkStyle default stroke:#FFFFFF,stroke-width:2px
 ```
 ---
 ## Hyperparameters

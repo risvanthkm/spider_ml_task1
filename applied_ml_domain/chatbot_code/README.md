@@ -12,8 +12,8 @@
 
 ---
 
-1. **Multimodel RAG** - Extracts textual content, tables, and images from research papers
-2. **Reranking** - A reranker reorders retrieved docs.
+1. **Multimodal RAG** - Extracts textual content, tables, and images from research papers
+2. **Reranking** - Reranks retrieved chunks to select highly relevant chunks.
 3. **Hybrid Search** - Hybrid search combines keyword search (BM25) with vector search 
 4. **Multi paper retrieval** - Supports retrieval across multiple research papers simultaneously
 5. **LaTex and Markdown Support**
@@ -36,6 +36,17 @@
 ## Ingestion Pipeline
 
 ```mermaid
+%%{
+init: {
+'theme':'base',
+'themeVariables':{
+'lineColor':'#FFFFFF',
+'primaryBorderColor':'#FFFFFF',
+'primaryTextColor':'#000000'
+}
+}
+}%%
+
 flowchart TD
 
 A[Research Papers PDFs] --> B[PDF Parsing]
@@ -71,11 +82,11 @@ I --> S[page_content]
 
 S --> W[Processed Text]
 
-W --> K[BGE-M3 Embeddings]
+L --> K[BGE-M3 Embeddings]
 
-K --> L[Batch Processing]
+W --> L[Batch Processing]
 
-L --> M[(ChromaDB)]
+K --> M[(ChromaDB)]
 
 J --> M
 
@@ -83,12 +94,12 @@ R1[Raw Images] --> M
 R2[Raw Tables] --> M
 R3[Source Metadata] --> M
 
-
-classDef source fill:#FFE4B5
-classDef extract fill:#B0E0E6
-classDef process fill:#D8BFD8
-classDef storage fill:#90EE90
-classDef embed fill:#FFB6C1
+linkStyle default stroke:#FFFFFF,stroke-width:2px
+classDef source fill:#FFE4B5,color:#000000,stroke:#333333
+classDef extract fill:#B0E0E6,color:#000000,stroke:#333333
+classDef process fill:#D8BFD8,color:#000000,stroke:#333333
+classDef storage fill:#90EE90,color:#000000,stroke:#333333
+classDef embed fill:#FFB6C1,color:#000000,stroke:#333333
 
 class A source
 class B,C1,C2,C3 extract
@@ -102,6 +113,17 @@ class M,R1,R2,R3,J storage
 ## Retrieval Pipeline
 
 ```mermaid
+%%{
+init: {
+'theme':'base',
+'themeVariables':{
+'lineColor':'#FFFFFF',
+'primaryBorderColor':'#FFFFFF',
+'primaryTextColor':'#000000'
+}
+}
+}%%
+
 flowchart TD
 
 A[User Query]
@@ -133,12 +155,12 @@ I --> J2[LaTeX]
 I --> J3[Images]
 I --> J4[Tables]
 
-
-classDef input fill:#FFE4B5
-classDef retrieval fill:#ADD8E6
-classDef rerank fill:#FFB6C1
-classDef generation fill:#D8BFD8
-classDef output fill:#90EE90
+linkStyle default stroke:#FFFFFF,stroke-width:2px
+classDef input fill:#FFE4B5,color:#000000,stroke:#333333
+classDef retrieval fill:#ADD8E6,color:#000000,stroke:#333333
+classDef rerank fill:#FFB6C1,color:#000000,stroke:#333333
+classDef generation fill:#D8BFD8,color:#000000,stroke:#333333
+classDef output fill:#90EE90,color:#000000,stroke:#333333
 
 class A input
 class B,C1,C2,D retrieval
@@ -146,6 +168,7 @@ class E,F rerank
 class G1,G2,G3,H,I generation
 class J1,J2,J3,J4 output
 ```
+
 
 
 

@@ -53,10 +53,10 @@ Sample reconstructions of autoencoders are stored in the `results/` directory.
 ## Applied ML Task
 
 > Built a Multimodel RAG system with a strong ingestion and retrieval pipeline. This system uses hybrid search to efficiently retrieve chunks when query has keywords in it. Also it implements an reranker to pick top 3 chunks from ~20 chunks retrieved from hybrid search.
-The RAG system is capable of extracting images and tables.
+The RAG system is capable of extracting images and tables from the PDFs. 
 >The frontend is built with `HTML` `CSS` `JS` and the backend with `python`.
 
-[RAG System Code](./applied_ml_domain/chatbot_code/README.md)
+[RAG System Documentation](./applied_ml_domain/chatbot_code/README.md)
 
 ## Thank You
 
