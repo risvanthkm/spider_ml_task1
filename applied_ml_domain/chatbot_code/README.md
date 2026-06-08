@@ -48,43 +48,53 @@ C1 --> D[Structure Aware Chunking<br/>chunk_by_title]
 C2 --> D
 C3 --> D
 
-D --> E[ Chunk ]
+D --> E[Chunk]
 
 E --> F1[Raw Text]
 E --> F2[Tables HTML]
 E --> F3[Images Base64]
 
-F1 --> G[Multimodal Preprocessing<br/>To extract Information from Tables and Images<br/>LLM summarizes the Tables and Images]
+F1 --> G[Multimodal Preprocessing]
 F2 --> G
 F3 --> G
 
 G --> H1[Preserve Document Text]
-G -->|Convert Tables into Summarized Text| H2[Summarize Tables<br/>Convert Tables into Summarized Text]
-G -->|Convert Images into Summarized Text| H3[Summarize Images]
+G --> H2[Summarize Tables]
+G --> H3[Summarize Images]
 
 H1 --> I[Create LangChain Documents]
 H2 --> I
 H3 --> I
 
+I --> J[Metadata]
+I --> S[page_content]
 
-J --> R1[Raw Images]
-J --> R2[Raw Tables]
-J --> R3[Source Metadata]
+S --> W[Processed Text]
 
 W --> K[BGE-M3 Embeddings]
 
-I --> J[metadata]
-I --> S[page_content] -->W[Processed Text content]
+K --> L[Batch Processing]
 
-K --> L[Batch-wise Processing]
+L --> M[(ChromaDB)]
 
-L --> M[Store in ChromaDB]
+J --> M
 
-R1 --> M[Store in ChromaDB]
-R2 --> M[Store in ChromaDB]
-R3 --> M[Store in ChromaDB]
+R1[Raw Images] --> M
+R2[Raw Tables] --> M
+R3[Source Metadata] --> M
 
 
+classDef source fill:#FFE4B5
+classDef extract fill:#B0E0E6
+classDef process fill:#D8BFD8
+classDef storage fill:#90EE90
+classDef embed fill:#FFB6C1
+
+class A source
+class B,C1,C2,C3 extract
+class D,E,F1,F2,F3,G,H1,H2,H3,I,S,W process
+class K,L embed
+class M,R1,R2,R3,J storage
 ```
 
 ---
@@ -98,33 +108,43 @@ A[User Query]
 
 A --> B[Hybrid Retrieval]
 
-B --> C1[BM25 Keyword Search]
-B --> C2[Chroma Vector Retrieval]
+B --> C1[BM25 Search]
+B --> C2[Vector Search]
 
-C1 --> D[Merge Retrieved Chunks<br/>RRF]
+C1 --> D[RRF Merge]
 C2 --> D
 
-D --> E[Cross Encoder Reranker<br/>bge-reranker-v2-m3]
+D --> E[Cross Encoder Reranker]
 
-E --> F[Top Relevant Chunks]
+E --> F[Top Chunks]
 
 F --> G1[Text]
 F --> G2[Images]
 F --> G3[Tables]
 
-G1 --> H[Gemma 4 Generation]
-G2 --> I
-G3 --> I
+G1 --> H[Gemma 4]
 
-H --> I[Frontend Rendering]
+G2 --> I[Frontend Rendering]
+G3 --> I
+H --> I
 
 I --> J1[Markdown]
-
-I --> J2[LaTeX ]
-
+I --> J2[LaTeX]
 I --> J3[Images]
-
 I --> J4[Tables]
+
+
+classDef input fill:#FFE4B5
+classDef retrieval fill:#ADD8E6
+classDef rerank fill:#FFB6C1
+classDef generation fill:#D8BFD8
+classDef output fill:#90EE90
+
+class A input
+class B,C1,C2,D retrieval
+class E,F rerank
+class G1,G2,G3,H,I generation
+class J1,J2,J3,J4 output
 ```
 
 
