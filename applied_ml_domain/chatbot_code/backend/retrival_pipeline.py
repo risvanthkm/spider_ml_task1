@@ -19,8 +19,8 @@ db = Chroma(
 stored_data = db.get()
 chunks = []
 
-for cont, metedata in zip(stored_data["documents"], stored_data["metadatas"]):
-    chunks.append(Document(page_content=cont, metedata=metedata))
+for cont, metadata in zip(stored_data["documents"], stored_data["metadatas"]):
+    chunks.append(Document(page_content=cont, metadata=metadata))
 
 vector_retriever = db.as_retriever(search_kwargs={"k": 10})
 
@@ -39,7 +39,7 @@ def rerank(query, chunks , top_k=3):
     score_list=list(zip(chunks, scores))
 
     score_list.sort(key = lambda x :x[1], reverse=True)
-    top_k_docs = [doc for doc, _ in score_list[:top_k]]
+    top_k_docs = [doc for doc, _ in score_list[:top_k-1]]
 
     return top_k_docs
 
@@ -48,17 +48,17 @@ def retrieve(query):
     response={}
     
     retrieved_chunks= hybrid_retriever.invoke(query)
-    relevent_chunks = rerank(query, retrieved_chunks)
+    relevant_chunks = rerank(query, retrieved_chunks, 5)
 
-    relevent_docs=""
+    relevant_docs=""
 
     images = []
     tables = []
     sources = []
 
-    for i , chunk in enumerate(relevent_chunks, 1):
+    for i , chunk in enumerate(relevant_chunks, 1):
 
-        relevent_docs += f"Document {i}:\n{chunk.page_content}\n"
+        relevant_docs += f"Document {i}:\n{chunk.page_content}\n"
 
         if chunk.metadata.get('raw_images', None):
             images.extend(chunk.metadata['raw_images'])
@@ -101,7 +101,7 @@ def retrieve(query):
 
         DOCUMENTS:
 
-        {relevent_docs}
+        {relevant_docs}
 
         Return ONLY the answer in Markdown.
 
