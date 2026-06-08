@@ -25,10 +25,10 @@ spider_ml_task1/
 │       ├── backend/                       # FastAPI backend
 │       └── frontend/                      # User interface
 │
-├── base_task/                             # Neural Network Task
+├── base_task/                             # Base Task
 │   ├── README.md
 │   ├── base_task.ipynb
-│   ├── CSV_files/                         # Dataset / outputs
+│   ├── CSV_files/                         # outputs
 │   └── saved_models/                      # Trained models
 │
 └── bonus_task/                            # Autoencoder Experiments
