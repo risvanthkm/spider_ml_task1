@@ -6,7 +6,7 @@ This repository consists of three major sections:
 
 - **base_task/** — Base ML task containing notebooks, CSV submissions, and trained models
 - **bonus_task/** — Autoencoder implementation and reconstruction analysis
-- **applied_ml_domain/chatbot_code/** — Full-stack RAG chatbot with backend and frontend implementation
+- **applied_ml_domain/chatbot_code/** — Multimodal RAG system with dedicated ingestion and retrieval pipelines 
 
 
 
