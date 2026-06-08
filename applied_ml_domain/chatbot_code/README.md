@@ -113,8 +113,8 @@ F --> G2[Images]
 F --> G3[Tables]
 
 G1 --> H[Gemma 4 Generation]
-G2 --> H
-G3 --> H
+G2 --> I
+G3 --> I
 
 H --> I[Frontend Rendering]
 
