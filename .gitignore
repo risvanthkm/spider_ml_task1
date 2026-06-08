@@ -1,4 +1,5 @@
 applied_ml_domain/*
-!applied_ml_domain/chat_bot_code
-.vscode	
+!applied_ml_domain/chat_bot_code/
+!applied_ml_domain/chat_bot_code/**
+.vscode/	
 
