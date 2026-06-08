@@ -88,7 +88,9 @@ W --> L[Batch Processing]
 
 K --> M[(ChromaDB)]
 
-J --> M
+J --> R1
+J --> R2
+J --> R3
 
 R1[Raw Images] --> M
 R2[Raw Tables] --> M
