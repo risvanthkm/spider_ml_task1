@@ -39,7 +39,7 @@ def rerank(query, chunks , top_k=3):
     score_list=list(zip(chunks, scores))
 
     score_list.sort(key = lambda x :x[1], reverse=True)
-    top_k_docs = [doc for doc, _ in score_list[:top_k-1]]
+    top_k_docs = [doc for doc, _ in score_list[:top_k]]
 
     return top_k_docs
 
